@@ -4,6 +4,7 @@
   <img src="https://img.shields.io/badge/Status-Beta-yellow">
   <img src="https://img.shields.io/badge/Linguagens-C%20%7C%20Assembly-blue">
   <img src="https://img.shields.io/badge/Ferramentas-NASM%20%7C%20GCC%20%7C%20QEMU-green">
+  <img src="https://img.shields.io/badge/MIT-License-green.svg" alt="MIT License">
 </p>
 <p align="center">
    <img src="https://img.shields.io/github/stars/mazinn444/MiniText-OS?style=social">
