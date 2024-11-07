@@ -25,7 +25,7 @@ O MiniText OS Beta é um sistema operacional básico desenvolvido em C e Assembl
 ## Ferramentas Utilizadas
 
 - [NASM](https://www.nasm.us/pub/nasm/releasebuilds/?C=M;O=D)
-- **GCC** ou [MinGW](https://www.mingw.org/)
+- **GCC** ou [MinGW]([https://www.mingw.org/](https://sourceforge.net/projects/mingw/))
 - [QEMU](https://www.qemu.org/download/)
 
 ## Como executar
