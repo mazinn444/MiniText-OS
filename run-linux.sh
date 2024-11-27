@@ -6,7 +6,6 @@ clear
 mkdir -p build
 
 # Compila o bootloader
-
 echo "[+] Compilando bootloader..."
 nasm -f bin boot/boot.asm -o build/boot.bin
 
@@ -14,13 +13,21 @@ nasm -f bin boot/boot.asm -o build/boot.bin
 echo "[+] Compilando kernel entry..."
 nasm -f elf32 kernel/kernel_entry.asm -o build/kernel_entry.o
 
-# Compila o kernel
-echo "[+] Compilando kernel..."
-gcc -m32 -c kernel/kernel.c -o build/kernel.o -ffreestanding -fno-pie
+# Compilar todos os arquivos .c do kernel
+echo "[+] Compilando arquivos do kernel..."
+# Usa find para pegar todos os .c no diretório kernel
+for c_file in $(find kernel -name "*.c"); do
+    obj_file="build/$(basename "$c_file" .c).o"
+    echo "   Compilando $c_file -> $obj_file"
+    gcc -m32 -c "$c_file" -o "$obj_file" -ffreestanding -fno-pie -I./kernel
+done
 
-# Link o kernel
+# Preparar lista de objetos para linkagem
+KERNEL_OBJS="build/kernel_entry.o $(find build -name "*.o" ! -name "kernel_entry.o")"
+
+# Link do kernel
 echo "[+] Linkando kernel..."
-ld -m elf_i386 -T kernel/linker.ld -o build/kernel.bin build/kernel_entry.o build/kernel.o --oformat binary
+ld -m elf_i386 -T kernel/linker.ld -o build/kernel.bin $KERNEL_OBJS --oformat binary
 
 # Cria a imagem do sistema
 echo "[+] Criando imagem do sistema..."
